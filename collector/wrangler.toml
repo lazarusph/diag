@@ -1,0 +1,26 @@
+name = "hex-diagnostics-collector"
+main = "worker.js"
+compatibility_date = "2026-09-09"
+workers_dev = true
+
+[vars]
+GITHUB_OWNER = "lazarusph"
+GITHUB_REPO = "diag"
+GITHUB_BRANCH = "main"
+GITHUB_LOG_PATH = "logs.json"
+
+[[ratelimits]]
+name = "CLIENT_RATE_LIMITER"
+namespace_id = "82021001"
+
+  [ratelimits.simple]
+  limit = 6
+  period = 60
+
+[[ratelimits]]
+name = "GLOBAL_RATE_LIMITER"
+namespace_id = "82021002"
+
+  [ratelimits.simple]
+  limit = 30
+  period = 60
