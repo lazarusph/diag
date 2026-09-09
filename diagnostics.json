@@ -1,64 +1,62 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "enabled": true,
   "title": "HEX GFX Diagnostics",
-  "message": "PermissionHub and CyberTask guidance is controlled from GitHub Pages. No device report is uploaded automatically.",
+  "subtitle": "PermissionHub and CyberTask failure reports",
+  "collector_url": "",
   "status_page_url": "https://lazarusph.github.io/diag/diagnostics.html",
+  "logs_url": "./logs.json",
   "timeout_ms": 8000,
-  "guidance": {
-    "SHIZUKU_NOT_RUNNING": "Start Shizuku, return to HEX GFX, then run Diagnostics again.",
-    "SHIZUKU_PERMISSION_REQUIRED": "Open Storage Permission, select Shizuku, and tap Grant Permission.",
-    "SHIZUKU_NOT_READY": "Wait a few seconds after starting Shizuku, then run the check again.",
-    "GRANT_NOT_SAVED": "Open Storage Permission and grant the Primary or Secondary folder again.",
-    "GRANT_INVALID": "Remove the old folder selection and grant access again.",
-    "GRANT_WRONG_FOLDER": "Select Android/data/com.mobile.legends/files exactly.",
-    "GRANT_NOT_PERSISTED": "Android removed the saved permission. Open Storage Permission and grant it again.",
-    "GRANT_READ_MISSING": "Grant both read and write access to the Mobile Legends files folder.",
-    "GRANT_WRITE_MISSING": "Write access is missing. Re-select the folder and allow full access.",
-    "GRANT_NOT_READABLE": "The stored folder can no longer be opened. Revoke it and select the folder again.",
-    "SAF_PERMISSION_MISSING": "The selected folder grant is missing or expired. Grant folder access again.",
-    "SAF_WRONG_TREE": "The selected folder is incorrect. Select Android/data/com.mobile.legends/files.",
-    "SAF_TARGET_UNAVAILABLE": "The Mobile Legends assets folder cannot be opened. Start the game once, then retry.",
-    "SAF_DIRECTORY_CREATE_FAILED": "Android blocked creation of a required folder. Re-grant folder access or use Shizuku.",
-    "SAF_FILE_CREATE_FAILED": "Android blocked creation of the skin file. Re-grant access or switch to Shizuku.",
-    "SAF_OUTPUT_OPEN_FAILED": "Android denied the write stream. Re-grant the folder permission or use Shizuku.",
-    "SAF_WRITE_FAILED": "Folder writing failed. Check the saved grant, free storage, and archive, then retry.",
-    "SHIZUKU_WRITE_FAILED": "Shizuku could not write the file. Confirm the service and app permission, then retry.",
-    "ARCHIVE_NOT_FOUND": "The downloaded ZIP is missing or empty. Check the link and internet connection.",
-    "EMPTY_ARCHIVE": "The ZIP contains no usable skin files. Check the archive structure.",
-    "DIRECTORY_CREATE_FAILED": "The destination directory could not be created. Check access and free storage.",
-    "DESTINATION_CREATE_FAILED": "The destination is unavailable. Check PermissionHub or Shizuku access.",
-    "WRITE_FAILED": "The file write failed. Check access, storage space, and the archive, then retry."
+  "client_cooldown_minutes": 15,
+  "privacy": {
+    "public_aggregate_only": true,
+    "collected": [
+      "failure code and stage",
+      "access mode and progress",
+      "device manufacturer and model",
+      "Android release and SDK",
+      "HEX GFX app version"
+    ],
+    "never_collected": [
+      "Android ID or advertising ID",
+      "account or contact information",
+      "file names, archive URLs or local paths",
+      "selected folder URI",
+      "stack traces"
+    ]
   },
-  "checks": [
-    {
-      "name": "Core data",
-      "url": "https://raw.githubusercontent.com/lazarusph/Lazarusph/refs/heads/main/data.json",
-      "expect": "json",
-      "required": true,
-      "enabled": true
-    },
-    {
-      "name": "Maintenance",
-      "url": "https://raw.githubusercontent.com/lazarusph/Lazarusph/refs/heads/main/maintenance.json",
-      "expect": "json",
-      "required": true,
-      "enabled": true
-    },
-    {
-      "name": "Notifications",
-      "url": "https://raw.githubusercontent.com/lazarusph/Lazarusph/refs/heads/main/notif.json",
-      "expect": "json",
-      "required": false,
-      "enabled": true
-    },
-    {
-      "name": "Skins",
-      "url": "https://raw.githubusercontent.com/lazarusph/Lazarusph/refs/heads/main/skin.json",
-      "expect": "json",
-      "required": true,
-      "enabled": true
-    }
-  ]
+  "guidance": {
+    "HEX-PERM-SHIZUKU-001": "Grant HEX GFX permission in Shizuku, then retry.",
+    "HEX-PERM-SHIZUKU-002": "Confirm Shizuku is running and reopen Storage Permission.",
+    "HEX-PERM-SAF-001": "Reopen Storage Permission and try the Android folder picker again.",
+    "HEX-PERM-SAF-002": "Select Android/data/com.mobile.legends/files exactly.",
+    "HEX-PERM-SAF-003": "Grant both read and write access, then use the selected folder.",
+    "HEX-PERM-SAF-004": "Remove the old folder grant and grant access again.",
+    "HEX-SHIZUKU-STATE-001": "Start Shizuku again before applying the skin.",
+    "HEX-SHIZUKU-PERM-001": "Grant Shizuku permission to HEX GFX again.",
+    "HEX-SHIZUKU-DIR-001": "Start Mobile Legends once and retry; otherwise re-check Shizuku.",
+    "HEX-SHIZUKU-DIR-002": "Confirm Shizuku is active and the game assets folder exists.",
+    "HEX-SHIZUKU-WRITE-001": "Restart Shizuku, verify free storage and retry the same skin.",
+    "HEX-SAF-PERM-001": "The saved grant expired. Grant the Mobile Legends files folder again.",
+    "HEX-SAF-GRANT-001": "Remove the invalid folder grant and select the folder again.",
+    "HEX-SAF-TREE-001": "Select Android/data/com.mobile.legends/files exactly.",
+    "HEX-SAF-TARGET-001": "Start Mobile Legends once, then re-grant the folder and retry.",
+    "HEX-SAF-DIR-001": "Android blocked a required folder. Re-grant access or use Shizuku.",
+    "HEX-SAF-FILE-001": "Android blocked creation of the skin file. Re-grant access or use Shizuku.",
+    "HEX-SAF-STREAM-001": "The saved folder cannot be written. Re-grant access or use Shizuku.",
+    "HEX-SAF-WRITE-001": "Check free storage and folder access, then retry.",
+    "HEX-SAF-WRITE-002": "Re-grant folder access and verify that the skin ZIP is valid.",
+    "HEX-LEGACY-PERM-001": "Grant storage access or select another permission method.",
+    "HEX-LEGACY-DIR-001": "The legacy destination is unavailable; use Secondary or Shizuku.",
+    "HEX-LEGACY-DIR-002": "Android blocked folder creation; use Secondary or Shizuku.",
+    "HEX-LEGACY-WRITE-001": "Android blocked legacy writing; use Secondary or Shizuku.",
+    "HEX-ARCHIVE-MISSING-001": "Check the skin link and internet connection, then retry.",
+    "HEX-ARCHIVE-EMPTY-001": "Replace the ZIP with an archive containing usable skin files.",
+    "HEX-ARCHIVE-READ-001": "The downloaded ZIP is damaged or unsupported. Replace the file.",
+    "HEX-CYBER-INPUT-001": "Restart HEX GFX and retry the operation.",
+    "HEX-CYBER-MODE-001": "Open Storage Permission and select a supported access mode.",
+    "HEX-CYBER-IO-001": "Verify the ZIP, storage space and selected permission, then retry.",
+    "HEX-CYBER-UNKNOWN-001": "Copy the report and inspect the latest PermissionHub/CyberTask state.",
+    "HEX-UNKNOWN-001": "Copy the report and inspect the latest PermissionHub/CyberTask state."
+  }
 }
-
